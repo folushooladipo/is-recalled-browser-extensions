@@ -51,5 +51,6 @@ const bodyNode = document.querySelector("body");
 if (bodyNode) {
   observer.observe(bodyNode, {
     childList: true,
+    subtree: true,
   });
 }

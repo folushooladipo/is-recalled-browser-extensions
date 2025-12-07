@@ -1,20 +1,43 @@
 {
-    "manifest_version": 3,
-    "name": "Reading time",
-    "version": "0.0.1",
-    "description": "Add the reading time to Chrome Extension documentation articles",
-    "icons": {
-        "16": "images/icon-16.png",
-        "32": "images/icon-32.png",
-        "48": "images/icon-48.png",
-        "128": "images/icon-128.png"
-    },
-    "content_scripts": [
-      {
-        "js": ["scripts/content.js"],
-        "matches": [
-          "https://*/*"
-        ]
-      }
-    ]
+  "manifest_version": 3,
+  "name": "Reading time",
+  "version": "0.0.1",
+  "description": "On-The-Go Recall Intel: Just browse. We'll tell you when you're looking at a recalled product.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "service_worker": "src/background.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/content.ts"
+      ],
+      "matches": [
+        "https://*/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; style-src-elem 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; default-src 'self' data:; connect-src 'self' data: http://localhost:8000 https://huggingface.co https://cas-bridge.xethub.hf.co https://cdn-lfs.huggingface.co https://cdn-lfs-us-1.huggingface.co https://raw.githubusercontent.com https://cdn-lfs-us-1.hf.co"
+  },
+  "action": {
+    "default_title": "IsRecalled",
+    "default_popup": "src/popup.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://isrecalled.com/*"
+  ]
 }

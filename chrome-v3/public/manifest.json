@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "v0.3.0 IsRecalled",
+  "description": "On-The-Go Recall Intel: Just browse. We'll tell you when you're looking at a recalled product.",
+  "version": "0.3.0",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "action": {
+    "default_icon": "icon.png",
+    "default_title": "IsRecalled",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/content.js",
+        "js/vendor.js"
+      ],
+      "matches": [
+        "https://*/*"
+      ]
+    }
+  ],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://isrecalled.com/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; style-src-elem 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; default-src 'self' data:; connect-src 'self' data: http://localhost:8000 https://huggingface.co"
+  }
+}
